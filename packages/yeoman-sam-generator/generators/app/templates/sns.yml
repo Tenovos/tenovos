@@ -1,0 +1,5 @@
+ExampleNotification:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: example-notification
+      DisplayName: aws-sns

@@ -1,0 +1,56 @@
+ExampleIAMRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: ExampleIAMRole
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: !Sub states.${AWS::Region}.amazonaws.com
+            Action: sts:AssumeRole
+      Path: '/'
+      Policies:
+        - PolicyName: ExampleIAMPolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - 'lambda:InvokeFunction'
+                Resource: '*'
+
+  ExampleLambda:
+      Type: AWS::Serverless::Function
+      Properties:
+        FunctionName: example-lambda
+        Handler: src/index.handler
+        Runtime: nodejs8.10
+        MemorySize: 128
+        Timeout: 30
+        Policies:
+          - AWSLambdaBasicExecutionRole
+        Events:
+          ExampleAPI:
+            Type: Api
+            Properties:
+              Path: /get
+              Method: get
+
+
+  ExampleStepFunction:
+      Type: AWS::StepFunctions::StateMachine
+      Properties:
+        StateMachineName: example-stepfunction
+        DefinitionString: !Sub |-
+          {
+            "StartAt": "HelloWorld",
+            "States": {
+              "HelloWorld": {
+                "Type": "Task",
+                "Resource": "${ExampleLambda.Arn}",
+                "End": true
+              }
+            }
+          }
+        RoleArn: !GetAtt ExampleIAMRole.Arn
