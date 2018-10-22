@@ -1,4 +1,5 @@
-'use strict';
+
+
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
@@ -10,7 +11,7 @@ module.exports = class extends Generator {
     this.log(
       yosay(`
       Welcome to ${chalk.red('aws-sam-builder created by Tenovos Corporation')}
-      `)
+      `),
     );
 
     const prompts = [
@@ -18,19 +19,19 @@ module.exports = class extends Generator {
         type: 'input',
         name: 'name',
         message: 'Please enter the name for the project?',
-        default: 'sam-project'
+        default: 'sam-project',
       },
       {
         type: 'input',
         name: 'description',
         message: 'Please enter the description for the project?',
-        default: 'sam-project'
+        default: 'sam-project',
       },
       {
         type: 'input',
         name: 'SAM_description',
         message: 'Please enter the description for the SAM template?',
-        default: 'sam-project'
+        default: 'sam-project',
       },
       {
         type: 'checkbox',
@@ -43,19 +44,19 @@ module.exports = class extends Generator {
           'SQS',
           'SNS',
           'IAM',
-          'StepFunction (Will gets deployed with Lambda and IAM by default)'
+          'StepFunction (Will gets deployed with Lambda and IAM by default)',
         ],
-        default: ['Lambda_with_API_Gateway']
-      }
+        default: ['Lambda_with_API_Gateway'],
+      },
     ];
 
-    return this.prompt(prompts).then(props => {
+    return this.prompt(prompts).then((props) => {
       this.props = props;
     });
   }
 
   writing() {
-    let finalarray = [];
+    const finalarray = [];
 
     let IAM;
     let Lambda;
@@ -65,23 +66,23 @@ module.exports = class extends Generator {
     let StepFunction;
     let S3;
     const writeTemplate = async () => {
-      const readfile = new Promise(resolve => {
-        var a = [
+      const readfile = new Promise((resolve) => {
+        const a = [
           'Lambda_with_API_Gateway',
           'DynamoDB',
           'S3',
           'SQS',
           'SNS',
           'IAM',
-          'StepFunction (Will gets deployed with Lambda and IAM by default)'
+          'StepFunction (Will gets deployed with Lambda and IAM by default)',
         ];
-        var b = this.props.resources;
+        const b = this.props.resources;
 
-        var b1 = new Set(b);
-        var difference = [...new Set([...a].filter(x => !b1.has(x)))];
+        const b1 = new Set(b);
+        const difference = [...new Set([...a].filter(x => !b1.has(x)))];
 
         if (difference.length > 0) {
-          for (let each of difference) {
+          for (const each of difference) {
             if (each === 'Lambda_with_API_Gateway') {
               Lambda = null;
             }
@@ -107,7 +108,7 @@ module.exports = class extends Generator {
             }
           }
         }
-        for (let every of b) {
+        for (const every of b) {
           if (every === 'Lambda_with_API_Gateway') {
             fs.readFile(this.templatePath('lambda.yml'), 'utf8', (err, lambdadata) => {
               if (err) {
@@ -131,7 +132,7 @@ module.exports = class extends Generator {
 
                   finalarray.push(DynamoDB);
                 }
-              }
+              },
             );
           }
           if (
@@ -149,7 +150,7 @@ module.exports = class extends Generator {
 
                   finalarray.push(StepFunction);
                 }
-              }
+              },
             );
           }
           if (every === 'S3') {
@@ -198,67 +199,64 @@ module.exports = class extends Generator {
           }
           if (every) {
             if (finalarray.length === 0) {
-              setTimeout(function() {
-                let body =
-                  'SAM template is being generated based on your selected preference';
+              setTimeout(() => {
+                const body = 'SAM template is being generated based on your selected preference';
                 resolve(body);
               }, 1000);
             }
           }
         }
       });
-      const finalizefile = body => {
-        return new Promise(resolve => {
-          console.log(body);
-          let final = {
-            SAMdescription: this.props.SAM_description,
-            IAM: IAM,
-            Lambda: Lambda,
-            DynamoDB: DynamoDB,
-            StepFunction: StepFunction,
-            SQS: SQS,
-            SNS: SNS,
-            S3: S3
-          };
-          resolve(final);
-        });
-      };
-      let finalRead = await readfile;
-      let finalizingRead = await finalizefile(finalRead);
+      const finalizefile = body => new Promise((resolve) => {
+        console.log(body);
+        const final = {
+          SAMdescription: this.props.SAM_description,
+          IAM,
+          Lambda,
+          DynamoDB,
+          StepFunction,
+          SQS,
+          SNS,
+          S3,
+        };
+        resolve(final);
+      });
+      const finalRead = await readfile;
+      const finalizingRead = await finalizefile(finalRead);
       return finalizingRead;
     };
 
-    writeTemplate().then(t => {
+    writeTemplate().then((t) => {
       this.fs.copyTpl(
         this.templatePath('_template.yml'),
         this.destinationPath('template.yml'),
-        t
+        t,
       );
     });
     this.fs.copy(
       this.templatePath('_jest.config.js'),
-      this.destinationPath('jest.config.js')
+      this.destinationPath('jest.config.js'),
     );
     this.fs.copy(
       this.templatePath('_buildspec.yml'),
-      this.destinationPath('buildspec.yml')
+      this.destinationPath('buildspec.yml'),
     );
     this.fs.copy(
       this.templatePath('_tests/_example.test.js'),
-      this.destinationPath('tests/example.test.js')
+      this.destinationPath('tests/example.test.js'),
     );
     this.fs.copy(
       this.templatePath('_src/_index.js'),
-      this.destinationPath('src/index.js')
+      this.destinationPath('src/index.js'),
     );
     this.fs.copyTpl(
       this.templatePath('_package.json'),
       this.destinationPath('package.json'),
-      { name: this.props.name, description: this.props.description }
+      { name: this.props.name, description: this.props.description },
     );
     this.fs.copyTpl(this.templatePath('_README.md'), this.destinationPath('README.md'), {
       name: this.props.name,
-      description: this.props.description
+      description: this.props.description,
     });
   }
 };
