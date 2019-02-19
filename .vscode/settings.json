@@ -1,0 +1,34 @@
+{
+    "eslint.validate": [
+        {
+            "language": "javascript",
+            "autoFix": true,
+        }
+    ],
+    "eslint.autoFixOnSave": true,
+    "tslint.autoFixOnSave": true,
+    // ===
+    // Files
+    // ===
+    "files.exclude": {
+        "**/*.log": true,
+        "**/*.log*": true,
+        "**/coverage": true
+    },
+    "files.associations": {
+        ".markdownlintrc": "jsonc",
+        "**/snippets/*.json": "jsonc"
+    },
+    // ===
+    // HTML
+    // ===
+    "emmet.triggerExpansionOnTab": true,
+    "emmet.includeLanguages": {
+        "vue-html": "html"
+    },
+    // ===
+    // JS(ON)
+    // ===
+    "jest.autoEnable": false,
+    "jest.enableCodeLens": false
+}

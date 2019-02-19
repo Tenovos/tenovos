@@ -1,0 +1,16 @@
+ExampleLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: example-lambda
+      Handler: src/index.handler
+      Runtime: nodejs8.10
+      MemorySize: 128
+      Timeout: 30
+      Policies:
+        - AWSLambdaBasicExecutionRole
+      Events:
+        ExampleAPI:
+          Type: Api
+          Properties:
+            Path: /get
+            Method: get

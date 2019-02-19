@@ -1,0 +1,4 @@
+ExampleSQS:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: example-queue

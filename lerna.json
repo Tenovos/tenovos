@@ -1,0 +1,24 @@
+{
+  "lerna": "3.4.3",
+  "packages": [
+    "packages/*"
+  ],
+  "npmClient": "yarn",
+  "npmClientArgs": [
+    "--no-lockfile"
+  ],
+  "version": "independent",
+  "useWorkspaces": true,
+  "command": {
+    "publish": {
+      "ignoreChanges": [
+        "*.md",
+        "*.json",
+        "*.txt",
+        "test/**",
+        "codemods/**",
+        "package.json"
+      ]
+    }
+  }
+}

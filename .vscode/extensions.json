@@ -1,0 +1,62 @@
+{
+    // See http://go.microsoft.com/fwlink/?LinkId=827846
+    // for the documentation about the extensions.json format
+    "recommendations": [
+      // Rename opening and closing tags
+      // https://github.com/formulahendry/vscode-auto-rename-tag
+      "formulahendry.auto-rename-tag",
+  
+      // Configure all editors with settings
+      // https://github.com/editorconfig/editorconfig-vscode
+      "editorconfig.editorconfig",
+
+      // Lint javascript files
+      // https://github.com/Microsoft/vscode-eslint
+      "dbaeumer.vscode-eslint",
+  
+      // Adds intellisense for css classes in templates and plain html
+      // https://github.com/gencer/HTML-Slim-CSS-SCSS-Class-Completion
+      "gencer.html-slim-scss-css-class-completion",
+  
+      // Test `.unit.js` files on save with Jest
+      // https://github.com/jest-community/vscode-jest
+      "orta.vscode-jest",
+  
+      // Lint markdown in README files
+      // https://github.com/DavidAnson/vscode-markdownlint
+      "davidanson.vscode-markdownlint",
+  
+      // Validating the installed modules against the dependencies defined in the package.json
+      // https://github.com/Microsoft/vscode-npm-scripts
+      "eg2.vscode-npm-script",
+  
+      // Autocompletes npm modules in import statements
+      // https://github.com/ChristianKohler/NpmIntellisense
+      "christian-kohler.npm-intellisense",
+  
+      // Autocomplete path and filenames
+      // https://github.com/ChristianKohler/PathIntellisense
+      "christian-kohler.path-intellisense",
+  
+      // SCSS Intellisense (Variables, Mixins and Functions)
+      // https://github.com/mrmlnc/vscode-scss
+      "mrmlnc.vscode-scss",
+  
+      // Lint-on-save with Stylelint
+      // https://github.com/shinnn/vscode-stylelint
+      "shinnn.stylelint",
+  
+      // Linting for typescript
+      // https://github.com/Microsoft/vscode-tslint
+      "eg2.tslint",
+  
+      // Syntax highlighting and more for .vue files
+      // https://github.com/vuejs/vetur
+      "octref.vetur",
+  
+      // Peek and go-to-definition for .vue files
+      // https://github.com/fuzinato/vscode-vue-peek
+      "dariofuzinato.vue-peek"
+    ]
+  }
+  

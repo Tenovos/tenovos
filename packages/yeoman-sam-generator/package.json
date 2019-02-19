@@ -1,0 +1,27 @@
+{
+  "name": "@tenovos/generator-aws-sam-builder",
+  "version": "0.0.0-development",
+  "description": "Used to generate AWS SAM template and the folder sturcture for deployment",
+  "author": {
+    "name": "naveen",
+    "email": "naveen@tenovos.com"
+  },
+  "files": [
+    "generators"
+  ],
+  "main": "generators/index.js",
+  "devDependencies": {
+    "yeoman-test": "^1.7.0",
+    "yeoman-assert": "^3.1.0",
+    "jest": "^23.6.0"
+  },
+  "dependencies": {
+    "yeoman-generator": "^2.0.1",
+    "chalk": "^2.1.0",
+    "yosay": "^2.0.1"
+  },
+  "scripts": {
+    "test:unit": "jest"
+  },
+  "license": "MIT"
+}

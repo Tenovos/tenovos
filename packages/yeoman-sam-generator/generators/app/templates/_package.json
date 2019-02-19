@@ -1,0 +1,12 @@
+{
+    "name": "@tenovos-services/<%= name %>",
+    "description": "<%= description %>",
+    "version": "0.0.0-development",
+    "private": true,
+    "devDependencies": {
+        "jest": "^23.6.0"
+    },
+    "scripts": {
+        "test": "jest"
+    }
+}
